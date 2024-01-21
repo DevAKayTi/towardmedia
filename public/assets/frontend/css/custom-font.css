@@ -1,0 +1,101 @@
+/* Copyright towardsmedia.org Developer Team */
+@font-face {
+    font-family: 'Pyidaungsu';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(/font/pyidaungsu_book_regular.ttf) format('ttf');
+  }
+  @font-face {
+    font-family: 'Ayar';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(/font/ayarfont/ayar-font/Ayar-KG7o.ttf) format('ttf');
+  }
+  @font-face {
+    font-family: 'Ayar Takhu';
+    font-style: bold;
+    font-weight: 700;
+    font-display: swap;
+    src: url(/font/ayarfont/ayar-takhu-font/AyarTakhu-MJAe.ttf) format('ttf');
+  }
+  @font-face {
+    font-family: 'Ayar Juno';
+    font-style: bold;
+    font-weight: 700;
+    font-display: swap;
+    src: url(/font/ayarfont/ayar-juno-font/AyarJuno-2LO8.ttf) format('ttf');
+  }
+  @font-face {
+    font-family: 'Ayar Kasone';
+    font-style: bold;
+    font-weight: 700;
+    font-display: swap;
+    src: url(/font/ayarfont/ayar-kasone-font/AyarKasone-KGVo.ttf) format('ttf');
+  }
+  @font-face {
+    font-family: 'Ayar Nayon';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(/font/ayarfont/ayar-nayon/Ayar_Nayon.ttf) format('ttf');
+  }
+  @font-face {
+    font-family: 'W10 Art House';
+    src: url(/font/win10arthouse.ttf) format('ttf');
+  }
+  @font-face {
+    font-family: 'W26 Art House';
+    src: url(/font/w26arthouse.ttf) format('ttf');
+  }
+  @font-face {
+    font-family: 'W52 Art House';
+    src: url(/font/w52arthouse.ttf) format('ttf');
+  }
+  @font-face {
+    font-family: 'W53 Art House';
+    src: url(/font/w53arthouse.ttf) format('ttf');
+  }
+  @font-face {
+    font-family: 'Z02 Typewriter';
+    src: url(/font/z02typewriter.ttf) format('ttf');
+  }
+  @font-face {
+    font-family: 'Z03 Press';
+    src: url(/font/z03press.ttf) format('ttf');
+  }
+  
+.__k-pyidaung-font{
+    font-family: 'Pyidaungsu','Ayar','Pyidaungsu',sans-serif !important;
+  }
+  .__k-nayon-font{
+    font-family: 'Ayar Nayon','Ayar','Pyidaungsu',sans-serif !important;
+  }
+  .__k-takhu-font{
+    font-family: 'Ayar Takhu','Ayar','Pyidaungsu',sans-serif !important;
+  }
+  .__k-juno-font{
+    font-family: 'Ayar Juno','Ayar','Pyidaungsu',sans-serif !important;
+  }
+  .__k-kasone-font{
+    font-family: 'Ayar Kasone','Ayar','Pyidaungsu',sans-serif !important;
+  }
+  .__k-w10-font{
+    font-family: 'W10 Art House','Ayar','Pyidaungsu',sans-serif !important;
+  }
+  .__k-w26-font{
+    font-family: 'W26 Art House','Ayar','Pyidaungsu',sans-serif !important;
+  }
+  .__k-w52-font{
+    font-family: 'W52 Art House','Ayar','Pyidaungsu',sans-serif !important;
+  }
+  .__k-w53-font{
+    font-family: 'W53 Art House','Ayar','Pyidaungsu',sans-serif !important;
+  }
+  .__k-z02-font{
+    font-family: 'Z02 Typewriter','Ayar','Pyidaungsu',sans-serif !important;
+  }
+  .__k-z03-font{
+    font-family: 'Z03 Press','Ayar','Pyidaungsu',sans-serif !important;
+  }

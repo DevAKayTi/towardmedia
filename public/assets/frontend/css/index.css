@@ -1,0 +1,58 @@
+/* Copyright towardsmedia.org Developer Team */
+
+@import url("custom-font.css");
+* {
+    outline-color: transparent;
+    -webkit-tap-highlight-color: transparent;
+    font-family: ui-sans-serif, system-ui, -apple-system, "Ayar", "Pyidaungsu",
+        BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans,
+        sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol,
+        Noto Color Emoji !important;
+}
+
+.__k-card_marker {
+    border-left: 9px solid #dc3545 !important;
+}
+
+.carousel-indicators .active {
+    background-color: #dc3545 !important;
+}
+
+.carousel-indicators button {
+    width: 20px !important;
+    height: 20px !important;
+    border-radius: 100%;
+    background-color: black !important;
+}
+.carousel-indicators {
+    bottom: -50px;
+}
+.carousel-control-next-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='red' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E");
+}
+
+.carousel-control-prev-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='red' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E");
+}
+
+.pagination > li > a {
+    background-color: white;
+    color: red;
+}
+@media screen and (max-width: 400px) {
+    li.page-item {
+        display: none;
+    }
+    .page-item:first-child,
+    .page-item:nth-child(2),
+    .page-item:nth-last-child(2),
+    .page-item:last-child,
+    .page-item.active,
+    .page-item.disabled {
+        display: block;
+    }
+}
+
+.myanamr{
+    font-family: 'Raleway', sans-serif;
+}
