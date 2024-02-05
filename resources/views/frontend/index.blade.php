@@ -11,7 +11,7 @@
                 <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
             </div>
             <div class="carousel-inner pt-2 ">
-                @foreach ($activeIssues as $key => $post)
+                @foreach ($newIssues as $key => $post)
                 <div class="carousel-item  {{$key == 0 ? 'active' : '' }}">
                     <a href="{{route('frontend.blog.show',$post->slug)}}" style="text-decoration: none">
                         <div class="d-block">
@@ -69,7 +69,7 @@
             <span class="text-black fw-bold" style="font-size:30px;">Active Issue</span>
         </div>
         <div class="row" id="active-issue">
-            @include('layouts.frontend.posts',['posts'=>$activeIssues,'cols'=>'col-lg-4 col-xl-4'])
+            @include('layouts.frontend.posts',['posts'=>$mostIssues,'cols'=>'col-lg-4 col-xl-4'])
         </div>
     </section>
     <hr>

@@ -16,12 +16,14 @@ use Illuminate\Support\Facades\Session;
 
 class PageController extends Controller
 {
-    //
+
 
     public function welcome()
     {
 
-        $activeIssues = PostResource::collection(Post::query()->where('published', '=', 1)->orderBy('views', 'desc')->take(3)->get());
+        $newIssues = PostResource::collection(Post::query()->where('published', '=', 1)->orderBy('id', 'desc')->take(3)->get());
+        $mostIssues = PostResource::collection(Post::query()->where('published', '=', 1)->orderBy('views', 'desc')->take(3)->get());
+
         // $news = PostResource::collection(Post::query()->where('published', '=', 1)->orderBy('published_at', 'desc')->where('type_id', '1')->take(8)->get());
         // $articles = PostResource::collection(Post::query()->where('published', '=', 1)->orderBy('published_at', 'desc')->where('type_id', '2')->take(6)->get());
 
@@ -30,7 +32,7 @@ class PageController extends Controller
         $volumes = VolumeResource::collection(Volume::query()->where('published', '=', 1)->orderBy('published_at', 'desc')->take(4)->get());
         $newsCategory = Category::query()->where('type_id', PostType::News)->get();
         $articlesCategory = Category::query()->where('type_id', PostType::Article)->get();
-        return view('frontend.index')->with(['activeIssues' => $activeIssues, 'podcasts' => $podcasts, 'volumes' => $volumes, 'newsCategory' => $newsCategory, 'articlesCategory' => $articlesCategory]);
+        return view('frontend.index')->with(['newIssues' => $newIssues,'mostIssues' => $mostIssues, 'podcasts' => $podcasts, 'volumes' => $volumes, 'newsCategory' => $newsCategory, 'articlesCategory' => $articlesCategory]);
     }
 
     public function index()
