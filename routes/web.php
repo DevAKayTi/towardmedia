@@ -40,7 +40,6 @@ Route::get('/c/{category:slug}', [FrontendPageController::class, 'groupByCategor
 
 Route::post('/blog/increaseViewCount/{post_id}', [FrontendPageController::class, 'increaseViewCount']);
 
-
 Route::middleware(['auth', 'prevent-back-history', 'check-user-status'])->prefix('admin')->group(function () {
     // dashboard
     Route::get('/', function () {
@@ -78,7 +77,6 @@ Route::middleware(['auth', 'prevent-back-history', 'check-user-status'])->prefix
     Route::get('/profile', [PageController::class, 'profile'])->name('profile');
     Route::post('/updateProfile/{id}', [PageController::class, 'updateProfile'])->name('updateProfile');
     Route::get('/profile/{id}/posts', [PageController::class, 'posts'])->name('authUser.posts');
-
 
     Route::post('createVolume', [PageController::class, 'createDynamicVolumeWithAjax'])->name('createVolume');
 });

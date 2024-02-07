@@ -145,7 +145,6 @@ class VolumeController extends Controller
             'published' => $request->published,
             'published_at' => $request->published == 0 ? null : ($volume->published_at == null ? Date::now() : $volume->published_at),
         ]);
-
         return redirect()->route('volumes.show', $volume->id);
     }
 
