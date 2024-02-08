@@ -49,16 +49,16 @@
                             <a class="nav-link {{ request()->routeIs('welcome') ? 'active' : ' '}} " href="{{route('welcome')}}">Home</a>
                         </li>
                         <li class="mx-3">
-                            <a class="nav-link {{ request()->routeIs('articles') ? 'active' : ' '}} " href="{{route('articles')}}">Articles</a>
+                            <a class="nav-link {{ request()->routeIs('articles') ? 'active' : ' '}} " href="{{route('articles')}}">News/Articles</a>
                         </li>
                         <li class="mx-3">
-                            <a class="nav-link {{ request()->routeIs('news') ? 'active' : ' '}} " href="{{route('news')}}">News</a>
+                            <a class="nav-link {{ request()->routeIs('volumes') ? 'active' : ' '}} " href="{{route('volumes')}}">Newsletter</a>
+                        </li>
+                        <li class="mx-3">
+                            <a class="nav-link {{ request()->routeIs('bulletins') ? 'active' : ' '}} " href="{{route('bulletins')}}">Bulletin</a>
                         </li>
                         <li class=" mx-3">
                             <a class="nav-link {{ request()->routeIs('podcasts') ? 'active' : ' '}} " href="{{route('podcasts')}}">Podcasts</a>
-                        </li>
-                        <li class=" mx-3">
-                            <a class="nav-link {{ request()->routeIs('volumes') ? 'active' : ' '}} " href="{{route('volumes')}}">Journals</a>
                         </li>
                         <li class="mx-3">
                             <a class="nav-link {{ request()->routeIs('about-us') ? 'active' : ' '}} " href="{{route('about-us')}}">About</a>

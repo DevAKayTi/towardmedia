@@ -30,10 +30,12 @@ Route::get('/', [FrontendPageController::class, 'welcome'])->name('welcome');
 Route::get('/articles', [FrontendPageController::class, 'articles'])->name('articles');
 Route::get('/about-us', [FrontendPageController::class, 'aboutUs'])->name('about-us');
 Route::get('/privacy-policy', [FrontendPageController::class, 'privacyPolicy'])->name('privacy-policy');
-Route::get('/news', [FrontendPageController::class, 'news'])->name('news');
+// Route::get('/news', [FrontendPageController::class, 'news'])->name('news');
+Route::get('/bulletins', [FrontendPageController::class, 'bulletins'])->name('bulletins');
 Route::get('/podcasts', [FrontendPageController::class, 'podcasts'])->name('podcasts');
 Route::get('/volumes', [FrontendPageController::class, 'volumes'])->name('volumes');
 Route::get('/volume/{id}', [FrontendPageController::class, 'volumeDetail'])->name('frontend.volumes.show');
+Route::get('/bulletin/{id}', [FrontendPageController::class, 'bulletinDetail'])->name('frontend.bulletins.show');
 
 Route::get('/p/{post:slug}', [FrontendPageController::class, 'show'])->name('frontend.blog.show');
 

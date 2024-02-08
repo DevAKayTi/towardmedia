@@ -214,18 +214,22 @@ class BulletinController extends Controller
                 })
                 ->editColumn('type_id', function ($post) {
                     switch ($post->type_id) {
-                        case PostType::Article:
+                        case PostType::News_Article:
                             # code...
-                            return 'Article';
+                            return 'News_Article';
                             break;
                         case PostType::Podcast:
                             # code...
                             return 'Podcast';
                             break;
-                        case PostType::News:
+                        case PostType::Newsletter:
                             # code...
-                            return 'News';
+                            return 'Newsletter';
                             break;
+                        case PostType::Newsbulletin:
+                            # code...
+                            return 'Newsbulletin';
+                            break;    
                         default:
                             # code...
                             return 'not_set';
