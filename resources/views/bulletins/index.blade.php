@@ -1,60 +1,32 @@
-@section('css')
-<style>
-    tfoot input {
-        width: 100%;
-        padding: 3px;
-        box-sizing: border-box;
-    }
-
-</style>
-@endsection
 @extends('layouts.backend.master')
-
 @section('content')
 <div class="content">
-    <main id="">
-        @include('layouts.posts.statistics')
-        <br />
-        <div class="row input-daterange">
-            <div class="col-md-4">
-                <input type="text" name="from_date" id="from_date" class="form-control" placeholder="From Date(Published)" readonly />
-            </div>
-            <div class="col-md-4">
-                <input type="text" name="to_date" id="to_date" class="form-control" placeholder="To Date (Published)" readonly />
-            </div>
-            <div class="col-md-4">
-                <button type="button" name="filter" id="filter" class="btn btn-primary">Filter</button>
-                <button type="button" name="refresh" id="refresh" class="btn btn-default">Refresh</button>
-            </div>
-        </div>
-        <br />
-
-
+    <main>
         <!-- Dynamic Table Full -->
+
         <div class="block block-rounded">
-            <div class="block-header block-header-default">
-                <h3 class="block-title ">Posts (<span id="postCountDatatable">{{$allPosts}}</span>)</h3>
+            <div class="block-header block-header-default d-flex justify-content-center align-items-center">
+                <h3 class="block-title ">Posts (<span id="bulletinsCount">{{$bulletinsCount}}</span>)</h3>
+                <a class="btn btn-block btn-primary " href="{{route('bulletins.create')}}">Create</a>
             </div>
             <div class="block-content block-content-full">
-                <table class="table table-striped table-borderless table-vcenter " id="posts-table">
+                <table class="table table-striped table-borderless table-vcenter " id="bulletins-table">
                     <thead>
                         <tr class="bg-body-dark">
                             <th>#</th>
                             <th>Title</th>
                             <th>Author</th>
-                            <th>Type</th>
-                            <th>Views</th>
-                            <th>Published </th>
+                            <th>Created</th>
+                            <th>Published</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tfoot>
                         <tr>
-                            <th>No</th>
+                            <th>#</th>
                             <th>Title</th>
                             <th>Author</th>
-                            <th>Type</th>
-                            <th>Views</th>
+                            <th>Created</th>
                             <th>Published</th>
                             <th>Action</th>
                         </tr>
@@ -65,14 +37,12 @@
     </main>
 </div>
 @endsection
-
 @section('footer-scripts')
-
-<script type="text/javascript">
+<script>
     $(document).ready(function() {
-        $('#posts-table tfoot th').each(function() {
+        $('#bulletins-table tfoot th').each(function() {
             var title = $(this).text();
-            if (title == 'No' || title == 'Action' || title == 'Created' || title == 'Published') {
+            if (title == '#' || title == 'Action' || title == 'Created' || title == 'Published') {
                 $(this).html('<input type="text" class=" form-control d-none" placeholder="Search ' + title + '" />');
             } else {
                 $(this).html('<input type="text" class=" form-control" placeholder="Search ' + title + '" />');
@@ -83,7 +53,7 @@
         load_data();
 
         function load_data(from_date = '', to_date = '') {
-            $('#posts-table').DataTable({
+            $('#bulletins-table').DataTable({
                 "processing": true
                 , "serverSide": true
                 , pagingType: "full_numbers"
@@ -109,7 +79,7 @@
                         });
                 }
                 , ajax: {
-                    url: '/admin/blogs'
+                    url: '/admin/bulletins'
                     , data: {
                         from_date: from_date
                         , to_date: to_date
@@ -136,13 +106,10 @@
                         }, {
                             data: 'author'
                             , name: 'author'
-                        }, {
-                            data: 'type_id'
-                            , name: 'type_id'
                         }
                         , {
-                            data: 'views'
-                            , name: 'views'
+                            data: 'created_at'
+                            , name: 'created_at'
                         }
                         , {
                             data: 'published_at'
@@ -159,11 +126,62 @@
             , });
         }
 
+        $(document).on('click', '.delete-bulletin-btn', function() {
+
+            swal({
+                    title: "Are you sure?"
+                    , text: "Once deleted, All of the posts related to that bulletin will be deleted."
+                    , icon: "warning"
+                    , buttons: true
+                    , dangerMode: true
+                , })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        if (bulletinId) {
+                            Dashmix.loader('show', 'bg-primary')
+                            $.ajaxSetup({
+                                headers: {
+                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                }
+                            });
+                            $.ajax({
+                                url: '/admin/bulletins/' + bulletinId
+                                , method: "Delete"
+                                , dataType: "json"
+                                , success: function(response) {
+                                    if (response.success) {
+                                        toastr.info(" ", "Record Deleted Successfully", {
+                                            iconClass: "toast-custom"
+                                        });
+
+                                        $('#bulletins-table').DataTable().ajax.reload();
+                                        swal("Bulletin and Articles has been deleted!", {
+                                            icon: "success"
+                                        , });
+                                    } else {
+                                        if (response.error) {
+                                            toastr.error(" ", response.error, {});
+                                        }
+                                    }
+                                }
+                                , complete: function() {
+                                    Dashmix.loader('hide')
+                                }
+                            });
+                        }
+                    } else {
+                        swal("Your Bulletin  is safe!");
+                    }
+                });
+            let bulletinId = $(this).data("id")
+
+        });
+
         $('#filter').click(function() {
             var from_date = $('#from_date').val();
             var to_date = $('#to_date').val();
             if (from_date != '' && to_date != '') {
-                $('#posts-table').DataTable().destroy();
+                $('#bulletins-table').DataTable().destroy();
                 load_data(from_date, to_date);
             } else {
                 alert('Both Date is required');
@@ -173,52 +191,8 @@
         $('#refresh').click(function() {
             $('#from_date').val('');
             $('#to_date').val('');
-            $('#posts-table').DataTable().destroy();
+            $('#bulletins-table').DataTable().destroy();
             load_data();
-        });
-
-        $('.dataTables_filter input[type="search"]').css({
-            'width': '400px'
-            , 'display': 'none'
-        });
-        $(document).on('click', '.delete-post-btn', function() {
-            if (confirm('Are you sure you want to delete this item?')) {
-                let postId = $(this).data("id")
-                if (postId) {
-                    $.ajaxSetup({
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        }
-                    });
-                    $.ajax({
-                        url: '/admin/blogs/' + postId
-                        , method: "Delete"
-                        , dataType: "json"
-                        , success: function(response) {
-                            if (response.success) {
-                                toastr.info(" ", "Record Deleted Successfully", {
-                                    iconClass: "toast-custom"
-                                });
-                                count = +$('#postCount').data('id') - 1
-
-                                if (response.post.published_at != null) {
-                                    let totalPublishedPosts = +$('#publishedPostsCount').text() - 1;
-                                    $('#publishedPostsCount').text(totalPublishedPosts);
-
-                                } else {
-                                    let totalUnpublishedPosts = +$('#unpublishedPostsCount').text() - 1;
-                                    $('#unpublishedPostsCount').text(totalUnpublishedPosts);
-                                }
-                                $('#posts-table').DataTable().ajax.reload();
-                            } else {
-                                if (response.error) {
-                                    toastr.error(response.error, 'ERROR!').css("width", "500px")
-                                }
-                            }
-                        }
-                    });
-                }
-            }
         });
 
         $('.dataTables_filter input[type="search"]').css({

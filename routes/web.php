@@ -9,6 +9,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\VolumeController;
+use App\Http\Controllers\BulletinController;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -73,12 +75,17 @@ Route::middleware(['auth', 'prevent-back-history', 'check-user-status'])->prefix
     Route::resource('volumes', VolumeController::class);
     Route::get('/volumes/{id}/articles', [VolumeController::class, 'articles'])->name('volumes.articles');
 
+    //Bulletins
+    Route::resource('bulletins', BulletinController::class);
+    Route::get('/bulletins/{id}/articles', [BulletinController::class, 'articles'])->name('bulletins.articles');
+
     // profile
     Route::get('/profile', [PageController::class, 'profile'])->name('profile');
     Route::post('/updateProfile/{id}', [PageController::class, 'updateProfile'])->name('updateProfile');
     Route::get('/profile/{id}/posts', [PageController::class, 'posts'])->name('authUser.posts');
 
     Route::post('createVolume', [PageController::class, 'createDynamicVolumeWithAjax'])->name('createVolume');
+    Route::post('createBulletin', [PageController::class, 'createDynamicBulletinWithAjax'])->name('createBulletin');
 });
 
 Route::get('/admin/login', [LoginController::class, 'showLoginForm'])->name('login');

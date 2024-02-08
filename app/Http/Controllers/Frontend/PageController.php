@@ -30,9 +30,11 @@ class PageController extends Controller
 
         $podcasts = PostResource::collection(Post::query()->where('published', '=', 1)->orderBy('published_at', 'desc')->where('type_id', '3')->take(6)->get());
         $volumes = VolumeResource::collection(Volume::query()->where('published', '=', 1)->orderBy('published_at', 'desc')->take(4)->get());
-        $newsCategory = Category::query()->where('type_id', PostType::News)->get();
-        $articlesCategory = Category::query()->where('type_id', PostType::Article)->get();
-        return view('frontend.index')->with(['newIssues' => $newIssues,'mostIssues' => $mostIssues, 'podcasts' => $podcasts, 'volumes' => $volumes, 'newsCategory' => $newsCategory, 'articlesCategory' => $articlesCategory]);
+        $newsletter = Category::query()->where('type_id', PostType::Newsletter)->get();
+        $newbulletin = Category::query()->where('type_id', PostType::Newsbulletin)->get();
+        $newArticle = Category::query()->where('type_id', PostType::News_Article)->get();
+
+        return view('frontend.index')->with(['newIssues' => $newIssues,'mostIssues' => $mostIssues, 'podcasts' => $podcasts, 'volumes' => $volumes, 'newsletter' => $newsletter, 'newbulletin' => $newbulletin, 'newArticle' => $newArticle]);
     }
 
     public function index()
