@@ -17,10 +17,13 @@ class TypeSeeder extends Seeder
     {
         //
         Type::create([
-            'name' => 'News',
+            'name' => 'News/Article',
         ]);
         Type::create([
-            'name' => 'Article',
+            'name' => 'NewsLetter',
+        ]);
+        Type::create([
+            'name' => 'NewsBulletin',
         ]);
         Type::create([
             'name' => 'Podcast',

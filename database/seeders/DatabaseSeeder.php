@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
             AuthorSeeder::class,
             TypeSeeder::class,
             VolumeSeeder::class,
+            BulletinSeeder::class,
             PostSeeder::class,
             TagSeeder::class,
             PostTagSeeder::class

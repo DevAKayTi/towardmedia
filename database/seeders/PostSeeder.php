@@ -44,6 +44,11 @@ class PostSeeder extends Seeder
                     'volume_id' => $faker->randomElement([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]),
                 ]);
             }
+            if ($post->type_id == 3) {
+                $post->update([
+                    'bulletin_id' => $faker->randomElement([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]),
+                ]);
+            }
             if ($post->published) {
                 $post->update([
                     'published_at' => $faker->dateTimeThisYear(),
