@@ -11,6 +11,7 @@ use App\Models\Post;
 use App\Models\PostCategory;
 use App\Models\Tag;
 use App\Models\Volume;
+use App\Models\Bulletin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -24,15 +25,12 @@ class PageController extends Controller
         $newIssues = PostResource::collection(Post::query()->where('published', '=', 1)->orderBy('id', 'desc')->take(3)->get());
         $mostIssues = PostResource::collection(Post::query()->where('published', '=', 1)->orderBy('views', 'desc')->take(3)->get());
 
-        // $news = PostResource::collection(Post::query()->where('published', '=', 1)->orderBy('published_at', 'desc')->where('type_id', '1')->take(8)->get());
-        // $articles = PostResource::collection(Post::query()->where('published', '=', 1)->orderBy('published_at', 'desc')->where('type_id', '2')->take(6)->get());
+        $podcasts = PostResource::collection(Post::query()->where('published', '=', 1)->orderBy('published_at', 'desc')->where('type_id', '=', PostType::Podcast)->take(6)->get());
+        $newsletter= PostResource::collection(Post::query()->where('published', '=', 1)->where('type_id', '=', PostType::Newsletter)->orderBy('id', 'desc')->take(6)->get());
+        $newsbulletin= PostResource::collection(Post::query()->where('published', '=', 1)->where('type_id', '=', PostType::Newsbulletin)->orderBy('id', 'desc')->take(6)->get());
+        $newArticles= PostResource::collection(Post::query()->where('published', '=', 1)->where('type_id', '=', PostType::News_Article)->orderBy('id', 'desc')->take(6)->get());
 
-
-        $podcasts = PostResource::collection(Post::query()->where('published', '=', 1)->orderBy('published_at', 'desc')->where('type_id', '3')->take(6)->get());
-        $volumes = VolumeResource::collection(Volume::query()->where('published', '=', 1)->orderBy('published_at', 'desc')->take(4)->get());
-        $newsCategory = Category::query()->where('type_id', PostType::News)->get();
-        $articlesCategory = Category::query()->where('type_id', PostType::Article)->get();
-        return view('frontend.index')->with(['newIssues' => $newIssues,'mostIssues' => $mostIssues, 'podcasts' => $podcasts, 'volumes' => $volumes, 'newsCategory' => $newsCategory, 'articlesCategory' => $articlesCategory]);
+        return view('frontend.index')->with(['newIssues' => $newIssues,'mostIssues' => $mostIssues, 'podcasts' => $podcasts, 'newsletters' => $newsletter, 'newsbulletins' => $newsbulletin, 'newArticles' => $newArticles]);
     }
 
     public function index()
@@ -90,18 +88,23 @@ class PageController extends Controller
 
     public function articles()
     {
-        $articles = Post::query()->where('published', 1)->orderBy('published_at', 'desc')->where('type_id', '2')->paginate(6);
+        $articles = Post::query()->where('published', 1)->orderBy('published_at', 'desc')->where('type_id', '1')->paginate(9);
         return view('frontend.articles')->with(['articles' => $articles]);
     }
 
     public function news()
     {
-        $news = Post::query()->where('published', 1)->orderBy('published_at', 'desc')->where('type_id', '1')->paginate(6);
-        return view('frontend.news')->with(['news' => $news]);
+        $volumes = Volume::query()->where('published', 1)->paginate(12);
+        return view('frontend.news')->with(['news' => $volumes]);
+    }
+    public function bulletins()
+    {
+        $bulletins = Bulletin::query()->where('published', 1)->paginate(12);
+        return view('frontend.bulletins')->with(['bulletins' => $bulletins]);
     }
     public function podcasts()
     {
-        $podcasts = Post::query()->where('published', 1)->orderBy('published_at', 'desc')->where('type_id', PostType::Podcast)->paginate(6);
+        $podcasts = Post::query()->where('published', 1)->orderBy('published_at', 'desc')->where('type_id', '4')->paginate(9);
         return view('frontend.podcasts')->with(['podcasts' => $podcasts]);
     }
 
@@ -115,6 +118,12 @@ class PageController extends Controller
     public function volumeDetail(Request $request, $title)
     {
         $articles = Volume::findOrFail($request->id)->articles()->whereIn('published', [1])->orderBy('published_at', 'desc')->paginate(6);
+        return view('frontend.articles')->with(['articles' => $articles]);
+    }
+
+    public function bulletinDetail(Request $request, $title)
+    {
+        $articles = Bulletin::findOrFail($request->id)->articles()->whereIn('published', [1])->orderBy('published_at', 'desc')->paginate(6);
         return view('frontend.articles')->with(['articles' => $articles]);
     }
 

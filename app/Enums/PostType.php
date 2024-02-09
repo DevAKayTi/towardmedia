@@ -11,7 +11,8 @@ use BenSampo\Enum\Enum;
  */
 final class PostType extends Enum
 {
-    const News =   1;
-    const Article =   2;
-    const Podcast =   3;
+    const News_Article =1;
+    const Newsletter =2;
+    const Newsbulletin =3;
+    const Podcast =4;
 }

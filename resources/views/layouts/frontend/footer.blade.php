@@ -3,7 +3,7 @@
 <footer class="container py-1">
     <div class="row d-flex align-items-center pb-3">
         <div class="col-md-6 text-center text-md-start py-3">
-            <span>&copy; 2022 towardsmedia.org.</span>
+            <span>&copy; 2022 towardsmedia.com.</span>
             <a class="d-inline-block text-decoration-none link-danger mx-1" href="{{route('privacy-policy')}}">Privacy & Policy</a>
         </div>
 

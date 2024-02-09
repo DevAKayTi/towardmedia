@@ -9,6 +9,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\VolumeController;
+use App\Http\Controllers\BulletinController;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -28,10 +30,12 @@ Route::get('/', [FrontendPageController::class, 'welcome'])->name('welcome');
 Route::get('/articles', [FrontendPageController::class, 'articles'])->name('articles');
 Route::get('/about-us', [FrontendPageController::class, 'aboutUs'])->name('about-us');
 Route::get('/privacy-policy', [FrontendPageController::class, 'privacyPolicy'])->name('privacy-policy');
-Route::get('/news', [FrontendPageController::class, 'news'])->name('news');
+// Route::get('/news', [FrontendPageController::class, 'news'])->name('news');
+Route::get('/bulletins', [FrontendPageController::class, 'bulletins'])->name('bulletins');
 Route::get('/podcasts', [FrontendPageController::class, 'podcasts'])->name('podcasts');
 Route::get('/volumes', [FrontendPageController::class, 'volumes'])->name('volumes');
 Route::get('/volume/{id}', [FrontendPageController::class, 'volumeDetail'])->name('frontend.volumes.show');
+Route::get('/bulletin/{id}', [FrontendPageController::class, 'bulletinDetail'])->name('frontend.bulletins.show');
 
 Route::get('/p/{post:slug}', [FrontendPageController::class, 'show'])->name('frontend.blog.show');
 
@@ -73,12 +77,17 @@ Route::middleware(['auth', 'prevent-back-history', 'check-user-status'])->prefix
     Route::resource('volumes', VolumeController::class);
     Route::get('/volumes/{id}/articles', [VolumeController::class, 'articles'])->name('volumes.articles');
 
+    //Bulletins
+    Route::resource('bulletins', BulletinController::class);
+    Route::get('/bulletins/{id}/articles', [BulletinController::class, 'articles'])->name('bulletins.articles');
+
     // profile
     Route::get('/profile', [PageController::class, 'profile'])->name('profile');
     Route::post('/updateProfile/{id}', [PageController::class, 'updateProfile'])->name('updateProfile');
     Route::get('/profile/{id}/posts', [PageController::class, 'posts'])->name('authUser.posts');
 
     Route::post('createVolume', [PageController::class, 'createDynamicVolumeWithAjax'])->name('createVolume');
+    Route::post('createBulletin', [PageController::class, 'createDynamicBulletinWithAjax'])->name('createBulletin');
 });
 
 Route::get('/admin/login', [LoginController::class, 'showLoginForm'])->name('login');

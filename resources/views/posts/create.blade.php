@@ -13,51 +13,51 @@
             @include('layouts.posts.settings')
             <div class="col-md-8 col-lg-7 col-xl-9 order-md-0 bg-body-dark">
                 <!-- Main Content -->
-                <div class="content">
-                    <div class="block block-rounded">
-                        <div class="block-content block-content-full d-flex justify-content-between border-bottom">
-                            <div>
-                                <a class="btn btn-alt-secondary" href="{{route('blogs.index')}}">
-                                    <i class="fa fa-arrow-left me-1"></i> Manage Posts
-                                </a>
+                    <div class="content">
+                        <div class="block block-rounded">
+                            <div class="block-content block-content-full d-flex justify-content-between border-bottom">
+                                <div>
+                                    <a class="btn btn-alt-secondary" href="{{route('blogs.index')}}">
+                                        <i class="fa fa-arrow-left me-1"></i> Manage Posts
+                                    </a>
+                                </div>
+                                <div>
+                                    <h1 class=" my-2 my-sm-3">New Blog Post</h1>
+                                </div>
+                                <div>
+                                    <input type="submit" value="SAVE" class="btn btn-sm btn-info" />
+                                </div>
                             </div>
-                            <div>
-                                <h1 class=" my-2 my-sm-3">New Blog Post</h1>
-                            </div>
-                            <div>
-                                <input type="submit" value="SAVE" class="btn btn-sm btn-info" />
-                            </div>
-                        </div>
-                        <div class="block-content">
-                            <div class="mb-4">
-                                <input type="text" class="form-control py-4 @error('title') is-invalid @enderror" id="title" name="title" value="{{ old('title') }}" placeholder="Add Title..">
-                                @error('title')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                            <div class="mb-4">
-                                <input type="text" class="form-control py-4 @error('description') is-invalid @enderror" id="description" name="description" value="{{ old('description') }}" placeholder="Add description..">
-                                @error('description')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                            <div class="mb-4">
-                                <textarea class="form-control @error('content') is-invalid @enderror" id="editor" placeholder="Enter content" name="content">
-                                {{ old('content') }}
-                                </textarea>
-                                @error('content')
-                                <span class="invalid-feedback">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
+                            <div class="block-content">
+                                <div class="mb-4">
+                                    <input type="text" class="form-control py-4 @error('title') is-invalid @enderror" id="title" name="title" value="{{ old('title') }}" placeholder="Add Title..">
+                                    @error('title')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                                <div class="mb-4">
+                                    <input type="text" class="form-control py-4 @error('description') is-invalid @enderror" id="description" name="description" value="{{ old('description') }}" placeholder="Add description..">
+                                    @error('description')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                                <div class="mb-4">
+                                    <textarea class="form-control @error('content') is-invalid @enderror" id="editor" placeholder="Enter content" name="content">
+                                    {{ old('content') }}
+                                    </textarea>
+                                    @error('content')
+                                    <span class="invalid-feedback">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
                 <!-- END Main Content -->
             </div>
         </div>
@@ -232,19 +232,32 @@
 
         if ($('#type').val() == 2) {
             $('#volume-row').removeClass('d-none');
-        } else {
+            $('#bulletin-row').addClass('d-none');
+
+        }else if ($('#type').val() == 3){
+            $('#bulletin-row').removeClass('d-none');
+            $('#volume-row').addClass('d-none');
+        }else {
             if (!$('#volume-row').hasClass('d-none'))
                 $('#volume-row').addClass('d-none');
+            if (!$('#bulletin-row').hasClass('d-none'))
+                $('#bulletin-row').addClass('d-none');
         }
+
         let categoryOfArticles = ['Poems', 'Articles', 'Essays', 'Break Free', 'Student Voice', 'Short Novel'];
         let categoryOfNews = ['Student News', 'People Message', 'War News', 'Weekly News', 'Brutal News of Military', 'Politic News', 'CDM News', 'Nway Oo Diary'];
         $(document).on('change', '#type', function() {
             if ($(this).val() == 2) {
                 $('#volume-row').removeClass('d-none');
-
-            } else {
+                $('#bulletin-row').addClass('d-none');
+            }else if ($(this).val() == 3){
+                $('#bulletin-row').removeClass('d-none');
+                $('#volume-row').addClass('d-none');
+            }else {
                 if (!$('#volume-row').hasClass('d-none'))
                     $('#volume-row').addClass('d-none');
+                if (!$('#bulletin-row').hasClass('d-none'))
+                    $('#bulletin-row').addClass('d-none');
             }
             // for category row
             if ($(this).val() == 1 || $(this).val() == 2) {

@@ -4,7 +4,7 @@
 
 <div class="container">
     <div class="row align-items-end">
-        <div id="carouselExampleIndicators" class="  carousel slide col-sm-12 col-lg-7 col-md-7 col-xl-7" data-bs-ride="true">
+        <div id="carouselExampleIndicators" class="pb-2 carousel slide col-sm-12 col-lg-7 col-md-7 col-xl-7" data-bs-ride="true">
             <div class="carousel-indicators  m-auto">
                 <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
                 <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
@@ -44,19 +44,18 @@
         </div>
         <!-- BannerCard -->
         <div class="col-sm-12 col-lg-4 col-md-4 col-xl-4 ms-lg-auto mt-2">
-            <div class="my-2 d-flex justify-content-between align-items-center">
-                <a href="#" class="btn btn-dark">Journals</a>
-                <a href="{{route('volumes')}}" class="text-danger align-middle"> View All</a>
+            <div class="my-2 d-flex justify-content-start align-items-center">
+                <div class="bg-dark text-white px-2 py-1 rounded">Podcasts</div>
             </div>
-            @foreach ($volumes as $post)
-            <a href="{{route('frontend.volumes.show',['volume'=>$post->title,'id'=>$post->id])}}" style=" text-decoration:none;">
+            @foreach ($podcasts as $post)
+            <a href="{{route('frontend.blog.show',$post->slug)}}" style=" text-decoration:none;">
                 <div class="card border-0 mb-3 bg-dark bg-opacity-10" style="min-width: 300px; min-height: 100px;">
                     <div class="__k-card_marker card-body overflow-hidden" style="min-width: 300px; min-height: 100px;">
-                        <h6 class="card-title dt" style="font-weight:bold ; color:black;">{{$post->title}}</h6>
-                        <span class="mt-4 text-black-50 card-text">
-                            <small class="text-muted">{{\Carbon\Carbon::parse($post->created_at)->format('M d, Y')}} </small>
+                        <h6 class="card-title dt mb-3" style="font-weight:bold ; color:black;">{{$post->title}}</h6>
+                        <span class="mt-5 text-black-50 card-text"><small class="text-muted"> {{\Carbon\Carbon::parse($post->created_at)->format('M d, Y')}}</small>
                         </span>
                     </div>
+                    <img src="{{$post->photo()}}" class="position-absolute end-0 opacity-50" alt="" srcset="" style="object-fit: contian; height:100%;">    
                 </div>
             </a>
             @endforeach
@@ -66,7 +65,7 @@
     <!-- Active Issue -->
     <section>
         <div class="mt-5 mb-4 text-center">
-            <span class="text-black fw-bold" style="font-size:30px;">Active Issue</span>
+            <span class="text-black fw-bold" style="font-size:30px;">Most Views</span>
         </div>
         <div class="row" id="active-issue">
             @include('layouts.frontend.posts',['posts'=>$mostIssues,'cols'=>'col-lg-4 col-xl-4'])
@@ -76,18 +75,9 @@
 
     {{-- Articles --}}
     <section>
-        <div class="h1 text-center fw-bolder mt-5 mb-4" style="font-weight: bold; ">Articles</div>
+        <div class="h1 text-center fw-bolder mt-5 mb-4" style="font-weight: bold; ">News/Articles</div>
         <div class="row" id="demo-news">
-            @foreach ($articlesCategory as $articleCat)
-            <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4 px-3 mb-4">
-                <a href="{{route('frontend.blog.groupByCategory',$articleCat->slug)}}" style="text-decoration:none;">
-
-                    <?php  $img=$articleCat->posts->last() ? asset('storage/uploads/featured/'.$articleCat->posts->last()->post_thumbnail.'') : asset('assets/logo/default.jpeg') ?>
-                    <img src="{{$img}}" class="d-block" alt="" srcset="" style="width:100%;object-fit: cover; height:300px; border-radius: 10px;">
-                    <h5 class="h5 mt-3 mb-2 fw-bold fs-6 text-black">{{$articleCat->name}}</h5>
-                </a>
-            </div>
-            @endforeach
+            @include('layouts.frontend.posts',['posts'=>$newArticles,'cols'=>'col-lg-4 col-xl-4'])
         </div>
     </section>
 
@@ -106,19 +96,19 @@
             </div>
         </div>
     </section>
-    <!-- news -->
+    <!-- newsletter -->
     <section>
-        <h1 class="h1 text-center fw-bolder mt-5 mb-4" style="font-weight: bold;">News</h1>
+        <h1 class="h1 text-center fw-bolder mt-5 mb-4" style="font-weight: bold;">Newsletter</h1>
         <div class="row" id="demo-news">
-            @foreach ($newsCategory as $newsCat)
-            <div class="col-sm-12 col-md-6 col-lg-3 col-xl-3 px-3 mb-4">
-                <a href="{{route('frontend.blog.groupByCategory',$newsCat->slug)}}" style="text-decoration:none;">
-                    <?php  $img=$newsCat->posts->last() ? asset('storage/uploads/featured/'.$newsCat->posts->last()->post_thumbnail.'') : asset('assets/logo/default.jpeg') ?>
-                    <img src="{{$img}}" class="d-block" alt="" srcset="" style="width:100%;object-fit: cover; height:300px; border-radius: 10px;">
-                    <h5 class="h5 mt-3 mb-2 fw-bold fs-6 text-black">{{$newsCat->name}}</h5>
-                </a>
-            </div>
-            @endforeach
+            @include('layouts.frontend.posts',['posts'=>$newsletters,'cols'=>'col-lg-4 col-xl-4'])
+        </div>
+    </section>
+    <!---->
+    <!-- newsBulletin -->
+    <section>
+        <h1 class="h1 text-center fw-bolder mt-5 mb-4" style="font-weight: bold;">News Bulletin</h1>
+        <div class="row" id="demo-news">
+            @include('layouts.frontend.posts',['posts'=>$newsbulletins,'cols'=>'col-lg-4 col-xl-4'])
         </div>
     </section>
     <!---->

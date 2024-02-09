@@ -14,6 +14,7 @@ use App\Models\Tag;
 use App\Models\Type;
 use App\Models\User;
 use App\Models\Volume;
+use App\Models\Bulletin;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
@@ -55,18 +56,22 @@ class PostController extends Controller
                 })
                 ->editColumn('type_id', function ($post) {
                     switch ($post->type_id) {
-                        case PostType::Article:
+                        case PostType::News_Article:
                             # code...
-                            return 'Article';
+                            return 'News_Article';
                             break;
                         case PostType::Podcast:
                             # code...
                             return 'Podcast';
                             break;
-                        case PostType::News:
+                        case PostType::Newsletter:
                             # code...
-                            return 'News';
+                            return 'Newsletter';
                             break;
+                        case PostType::Newsbulletin:
+                            # code...
+                            return 'Newsbulletin';
+                            break;    
                         default:
                             # code...
                             return 'not_set';
@@ -104,9 +109,11 @@ class PostController extends Controller
         //
         $types = Type::query()->get();
         $tags = Tag::query()->get();
-        $volumes = Volume::query()->get();
-        $categories = Category::all();
-        return view('posts.create', ['types' => $types, 'tags' => $tags, 'volumes' => $volumes, 'categories' => $categories]);
+        $volumes = Volume::query()->orderByDesc('id')->get();
+        $bulletins = Bulletin::query()->orderByDesc('id')->get();
+        // $categories = Category::all();
+        
+        return view('posts.create', ['types' => $types, 'tags' => $tags, 'volumes' => $volumes, 'bulletins' => $bulletins]);
     }
 
     /**
@@ -117,7 +124,7 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        echo($request);
         $request->validate([
             'content' => 'required',
             'title' => 'required',
@@ -127,20 +134,26 @@ class PostController extends Controller
             'description' => 'required|min:6|max:200',
             'featuredImage' => 'required|file|max:5120|mimes:jpeg,png,jpg,gif,svg|image',
         ]);
-        if (!($request->type == PostType::Podcast)) {
-            $request->validate([
-                'category' => 'required'
-            ], [
-                'category.required' => 'Please Choose Category',
-            ]);
-        }
+        // if (!($request->type == PostType::Podcast)) {
+        //     $request->validate([
+        //         'category' => 'required'
+        //     ], [
+        //         'category.required' => 'Please Choose Category',
+        //     ]);
+        // }
         if (!$request->hasFile('featuredImage')) {
             return back()->withErrors(['featuredImage' => 'Please Upload featured Image']);
         }
         if ($request->type == 2) {
-            //if article type need to have volume
+            //if newLetter type need to have volume
             $request->validate([
                 'volume' => 'required'
+            ]);
+        }
+        if ($request->type == 3) {
+            //if newBulletin type need to have volume
+            $request->validate([
+                'bulletin' => 'required'
             ]);
         }
         DB::beginTransaction();
@@ -176,6 +189,12 @@ class PostController extends Controller
                 //if article type need to have volume
                 $post->update([
                     'volume_id' => $request->volume,
+                ]);
+            }
+            if ($request->type == 3) {
+                //if article type need to have volume
+                $post->update([
+                    'bulletin_id' => $request->bulletin,
                 ]);
             }
             DB::commit();
@@ -214,9 +233,10 @@ class PostController extends Controller
         }
         $types = Type::query()->get();
         $tags = Tag::query()->get();
-        $volumes = Volume::query()->get();
-        $categories = Category::all();
-        return view('posts.edit', ['post' => $post, 'types' => $types, 'tags' => $tags, 'volumes' => $volumes, 'categories' => $categories]);
+        $volumes = Volume::query()->orderByDesc('id')->get();
+        $bulletins = Bulletin::query()->orderByDesc('id')->get();
+        // $categories = Category::all();
+        return view('posts.edit', ['post' => $post, 'types' => $types, 'tags' => $tags, 'volumes' => $volumes, 'bulletins' => $bulletins]);
     }
 
     /**
@@ -239,13 +259,13 @@ class PostController extends Controller
             'published' => 'required',
             'description' => 'required|min:6|max:200',
         ]);
-        if (!($request->type == PostType::Podcast)) {
-            $request->validate([
-                'category' => 'required'
-            ], [
-                'category.required' => 'Please Choose Category'
-            ]);
-        }
+        // if (!($request->type == PostType::Podcast)) {
+        //     $request->validate([
+        //         'category' => 'required'
+        //     ], [
+        //         'category.required' => 'Please Choose Category'
+        //     ]);
+        // }
         if ($request->user()->cannot('update', $post)) {
             abort(403);
         }
@@ -254,6 +274,13 @@ class PostController extends Controller
             //if article type need to have volume
             $request->validate([
                 'volume' => 'required'
+            ]);
+        }
+
+        if ($request->type == 3) {
+            //if newBulletin type need to have volume
+            $request->validate([
+                'bulletin' => 'required'
             ]);
         }
         DB::beginTransaction();
@@ -293,6 +320,14 @@ class PostController extends Controller
                 //if article type need to have volume
                 $post->update([
                     'volume_id' => $request->volume,
+                    'bulletin_id' => null,
+                ]);
+            }
+            if ($request->type == 3) {
+                //if article type need to have volume
+                $post->update([
+                    'bulletin_id' => $request->bulletin,
+                    'volume_id' => null,
                 ]);
             }
             $post->tags()->detach();
@@ -398,18 +433,22 @@ class PostController extends Controller
                 })
                 ->editColumn('type_id', function ($post) {
                     switch ($post->type_id) {
-                        case PostType::Article:
+                        case PostType::News_Article:
                             # code...
-                            return 'Article';
+                            return 'News_Article';
                             break;
                         case PostType::Podcast:
                             # code...
                             return 'Podcast';
                             break;
-                        case PostType::News:
+                        case PostType::Newsletter:
                             # code...
-                            return 'News';
+                            return 'Newsletter';
                             break;
+                        case PostType::Newsbulletin:
+                            # code...
+                            return 'Newsbulletin';
+                            break;    
                         default:
                             # code...
                             return 'not_set';
@@ -450,18 +489,22 @@ class PostController extends Controller
                 })
                 ->editColumn('type_id', function ($post) {
                     switch ($post->type_id) {
-                        case PostType::Article:
+                        case PostType::News_Article:
                             # code...
-                            return 'Article';
+                            return 'News_Article';
                             break;
                         case PostType::Podcast:
                             # code...
                             return 'Podcast';
                             break;
-                        case PostType::News:
+                        case PostType::Newsletter:
                             # code...
-                            return 'News';
+                            return 'Newsletter';
                             break;
+                        case PostType::Newsbulletin:
+                            # code...
+                            return 'Newsbulletin';
+                            break;    
                         default:
                             # code...
                             return 'not_set';

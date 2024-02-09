@@ -23,26 +23,6 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="row mb-4 d-none " id="category-row">
-                                <label class="col-sm-4 col-form-label">Category</label>
-                                <div class="col-sm-8">
-                                    <select class="form-select form-control @error('category') is-invalid @enderror" id="category" name="category">
-                                        <option value={{null}}> Choose Category</option>
-                                        @foreach ($categories as $category)
-                                        @if ($category->id == $post->category_id)
-                                        <option value="{{$category->id}}" data-type="{{$category->type_id}}" selected>{{ $category->name }}</option>
-                                        @else
-                                        <option value="{{$category->id}}" data-type="{{$category->type_id}}">{{$category->name}}</option>
-                                        @endif
-                                        @endforeach
-                                    </select>
-                                    @error('category')
-                                    <span class="invalid-feedback">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
                             <div class="row mb-4 " id="volume-row">
                                 <label class="col-sm-4 col-form-label">Volume</label>
                                 <div class="col-sm-8">
@@ -69,6 +49,20 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                     @enderror
+                                </div>
+                            </div>
+                            <div class="row mb-4 d-none " id="bulletin-row">
+                                <label class="col-sm-4 col-form-label">Volume</label>
+                                <div class="col-sm-8">
+                                    <select class=" form-control @error('bulletin') is-invalid @enderror" id="bulletin" name="bulletin" style="width: 100%;">
+                                        @foreach ($bulletins as $bulletin)
+                                        @if (old('bulletin') == $bulletin->id)
+                                        <option value="{{$bulletin->id}}" selected>{{ $bulletin->title }}</option>
+                                        @else
+                                        <option value="{{$bulletin->id}}">{{$bulletin->title}}</option>
+                                        @endif
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                             <div class="row mb-4">
