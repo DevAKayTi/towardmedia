@@ -103,6 +103,7 @@
             @include('layouts.frontend.posts',['posts'=>$newsletters,'cols'=>'col-lg-4 col-xl-4'])
         </div>
     </section>
+    <hr>
     <!---->
     <!-- newsBulletin -->
     <section>
