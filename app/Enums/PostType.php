@@ -5,10 +5,10 @@ namespace App\Enums;
 use BenSampo\Enum\Enum;
 
 /**
- * @method static static OptionOne()
- * @method static static OptionTwo()
- * @method static static OptionThree()
- */
+ *  @method static static OptionOne()
+ *  @method static static OptionTwo()
+ *  @method static static OptionThree()
+ **/
 final class PostType extends Enum
 {
     const News_Article =1;
@@ -16,4 +16,5 @@ final class PostType extends Enum
     const Newsbulletin =3;
     const Podcast =4;
     const Article =5;
+    const News =6;
 }
