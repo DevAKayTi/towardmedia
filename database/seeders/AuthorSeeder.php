@@ -21,7 +21,7 @@ class AuthorSeeder extends Seeder
             'name' => 'admin',
             'email' => 'admin@gmail.com',
             'role' => 2, //2 for super admin
-            'password' => Hash::make('adminadmin'),
+            'password' => Hash::make('746(76xzRy/T'),
             'status' => '1',
         ]);
         for ($i = 1; $i <= 3; $i++) {
@@ -29,7 +29,7 @@ class AuthorSeeder extends Seeder
                 'name' => 'Author' . $i,
                 'email' => 'author' . $i . '@gmail.com',
                 'role' => 1, //1 for normal admin
-                'password' => Hash::make('adminadmin'),
+                'password' => Hash::make('f#IvO%$*65h3'),
                 'status' => '1',
             ]);
         }
