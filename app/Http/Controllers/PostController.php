@@ -111,7 +111,6 @@ class PostController extends Controller
         $tags = Tag::query()->get();
         $volumes = Volume::query()->orderByDesc('id')->get();
         $bulletins = Bulletin::query()->orderByDesc('id')->get();
-        // $categories = Category::all();
         
         return view('posts.create', ['types' => $types, 'tags' => $tags, 'volumes' => $volumes, 'bulletins' => $bulletins]);
     }
@@ -134,13 +133,7 @@ class PostController extends Controller
             'description' => 'required|min:6|max:200',
             'featuredImage' => 'required|file|max:5120|mimes:jpeg,png,jpg,gif,svg|image',
         ]);
-        // if (!($request->type == PostType::Podcast)) {
-        //     $request->validate([
-        //         'category' => 'required'
-        //     ], [
-        //         'category.required' => 'Please Choose Category',
-        //     ]);
-        // }
+
         if (!$request->hasFile('featuredImage')) {
             return back()->withErrors(['featuredImage' => 'Please Upload featured Image']);
         }
@@ -174,7 +167,6 @@ class PostController extends Controller
                 'description' => $request->description,
                 'slug' => UUIDGenerate::slug($slug),
                 'views' => 0,
-                'category_id' => $request->category,
                 'post_thumbnail' => $filename,
                 'published' => $request->published,
                 'published_at' => $request->published == 1 ? now() : null,
