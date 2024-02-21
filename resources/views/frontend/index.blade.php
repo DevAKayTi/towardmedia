@@ -48,6 +48,7 @@
                 <div class="bg-dark text-white px-2 py-1 rounded">Podcasts</div>
             </div>
             @foreach ($podcasts as $post)
+            @if ($loop->index < 4)
             <a href="{{route('frontend.blog.show',$post->slug)}}" style=" text-decoration:none;">
                 <div class="card border-0 mb-3 bg-dark bg-opacity-10" style="min-width: 300px; min-height: 100px;">
                     <div class="__k-card_marker card-body overflow-hidden" style="min-width: 300px; min-height: 100px;">
@@ -58,6 +59,7 @@
                     <img src="{{$post->photo()}}" class="position-absolute end-0 opacity-80" alt="" srcset="" style="object-fit: contian; height:100%;">    
                 </div>
             </a>
+            @endif
             @endforeach
         </div>
     </div>
