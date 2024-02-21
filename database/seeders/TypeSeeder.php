@@ -28,11 +28,5 @@ class TypeSeeder extends Seeder
         Type::create([
             'name' => 'Podcast',
         ]);
-        Type::create([
-            'name' => 'Article',
-        ]);
-        Type::create([
-            'name' => 'News',
-        ]);
     }
 }

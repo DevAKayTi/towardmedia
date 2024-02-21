@@ -25,7 +25,7 @@ class PageController extends Controller
         $newIssues = PostResource::collection(Post::query()->where('published', '=', 1)->orderBy('id', 'desc')->take(3)->get());
         $mostIssues = PostResource::collection(Post::query()->where('published', '=', 1)->orderBy('views', 'desc')->take(3)->get());
 
-        $podcasts = PostResource::collection(Post::query()->where('published', '=', 1)->orderBy('published_at', 'desc')->where('type_id', '=', PostType::Podcast)->take(6)->get());
+        $podcasts = PostResource::collection(Post::query()->where('published', '=', 1)->orderBy('published_at', 'desc')->where('type_id', '=', PostType::Podcast)->take(4)->get());
         $newsletter= PostResource::collection(Post::query()->where('published', '=', 1)->where('type_id', '=', PostType::Newsletter)->orderBy('id', 'desc')->take(6)->get());
         $newsbulletin= PostResource::collection(Post::query()->where('published', '=', 1)->where('type_id', '=', PostType::Newsbulletin)->orderBy('id', 'desc')->take(6)->get());
         $newArticles= PostResource::collection(Post::query()->where('published', '=', 1)->where('type_id', '=', PostType::News_Article)->orderBy('id', 'desc')->take(6)->get());

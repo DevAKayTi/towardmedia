@@ -123,7 +123,6 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        echo($request);
         $request->validate([
             'content' => 'required',
             'title' => 'required',
@@ -172,6 +171,7 @@ class PostController extends Controller
                 'published_at' => $request->published == 1 ? now() : null,
             ]);
             foreach ($request->tags as $tag) {
+                
                 PostTag::create([
                     'post_id' => $post->id,
                     'tag_id' => $tag,
@@ -251,13 +251,7 @@ class PostController extends Controller
             'published' => 'required',
             'description' => 'required|min:6|max:200',
         ]);
-        // if (!($request->type == PostType::Podcast)) {
-        //     $request->validate([
-        //         'category' => 'required'
-        //     ], [
-        //         'category.required' => 'Please Choose Category'
-        //     ]);
-        // }
+        
         if ($request->user()->cannot('update', $post)) {
             abort(403);
         }
@@ -305,7 +299,6 @@ class PostController extends Controller
                 'description' => $request->description,
                 'published' => $request->published,
                 'post_thumbnail' => $filename,
-                'category_id' => $request->type == PostType::Podcast ? null : $request->category,
                 'published_at' => $request->published == 1 ? ($post->published == 1 ? $post->published_at : now()) : null,
             ]);
             if ($request->type == 2) {

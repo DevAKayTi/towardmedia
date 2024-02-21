@@ -15,6 +15,4 @@ final class PostType extends Enum
     const Newsletter =2;
     const Newsbulletin =3;
     const Podcast =4;
-    const Article =5;
-    const News =6;
 }
