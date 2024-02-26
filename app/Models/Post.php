@@ -42,6 +42,11 @@ class Post extends Model
         return $this->belongsTo(Volume::class);
     }
 
+    public function bulletin()
+    {
+        return $this->belongsTo(Bulletin::class);
+    }
+
     public function tags()
     {
         return $this->belongsToMany(Tag::class, PostTag::class);

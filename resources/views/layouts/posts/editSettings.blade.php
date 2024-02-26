@@ -56,8 +56,12 @@
                                 <div class="col-sm-8">
                                     <select class=" form-control @error('bulletin') is-invalid @enderror" id="bulletin" name="bulletin" style="width: 100%;">
                                         @foreach ($bulletins as $bulletin)
-                                        @if (old('bulletin') == $bulletin->id)
+                                        @if ($post->bulletin !== null)
+                                        @if ($post->bulletin->id == $bulletin->id)
                                         <option value="{{$bulletin->id}}" selected>{{ $bulletin->title }}</option>
+                                        @else
+                                        <option value="{{$bulletin->id}}">{{$bulletin->title}}</option>
+                                        @endif
                                         @else
                                         <option value="{{$bulletin->id}}">{{$bulletin->title}}</option>
                                         @endif
