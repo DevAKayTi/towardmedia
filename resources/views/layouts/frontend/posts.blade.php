@@ -3,7 +3,7 @@
 <div class="col-sm-12 col-md-6 {{$cols}} px-3 mb-4">
     <a href="{{route('frontend.blog.show',$post->slug)}}" style="text-decoration:none;">
 
-        <img src="{{$post->photo()}}" class="d-block" alt="" srcset="" style="width:100%;object-fit: cover; height:300px; border-radius:10px;">
+        <img src="{{$post->photo()}}" class="d-block" alt="" srcset="" style="width:100%;object-fit: contain; height:300px; border-radius:10px;">
         <h5 class="h5 mt-3 mb-2 fw-bold fs-6 text-black">{{$post->title}}</h5>
         <div class="overflow-hidden mb-3 text-black text-truncate">
             {{$post->description}}
