@@ -27,7 +27,7 @@
                                     <i class="fas fa-eye ms-3 me-1" style="color: red; font-size: 20px ;"></i>{{$post->number_format_short($post->views) }}
                                 </span>
                             </div>
-                            <img class="d-block" src="{{$post->photo()}}" alt="" style="width: 100%;height:380px;object-fit:cover;" />
+                            <img class="d-block" src="{{$post->photo()}}" alt="" style="width: 100%;height:380px;object-fit:contain;" />
                         </div>
                     </a>
                 </div>

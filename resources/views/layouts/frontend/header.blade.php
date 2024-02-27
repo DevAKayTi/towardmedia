@@ -15,7 +15,7 @@
 
 
     {{-- <meta name="keywords" content="ideological revolution"> --}}
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets/logo/favicon-16x16.png') }}">
+    <!-- <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets/logo/favicon-16x16.png') }}"> -->
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/logo/favicon-32x32.png') }}">
     <link rel="icon" type="image/png" sizes="192x192" href="{{ asset('assets/logo/logo.png') }}">
     <link rel="manifest" href="{{asset('assets/frontend/site.webmanifest')}}">
@@ -38,7 +38,7 @@
         <div class="container">
             <nav class="navbar navbar-expand-md navbar-light">
                 <a class="navbar-brand" href="{{route('welcome')}}">
-                    <img src="{{asset('assets/logo/logo.png')}}" alt="Logo" width="100" class="d-inline-block align-top">
+                    <img src="{{asset('assets/logo/logo.png')}}" alt="Logo" width="70" class="d-inline-block align-top"  style="object-fit: cover;">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#toggleMobileMenu" aria-controls="toggleMobileMenu" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>

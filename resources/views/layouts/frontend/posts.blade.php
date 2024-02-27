@@ -12,10 +12,10 @@
             <div class=" d-flex justify-content-center align-items-center ">
                 @include('layouts.frontend.utils.tags',['tags'=>$post->tags()->limit(2)->get()])
             </div>
-            {{-- <a href="#" class="text-danger align-middle ms-3"> View All</a> --}}
+            {{-- <a href="#" class="text-danger align-middle ms-3">View All</a> --}}
         </div>
         <div>
-            <span class="mt-5 text-black-50 card-text"><small class="text-muted"> {{\Carbon\Carbon::parse($post->created_at)->format('M d, Y')}} created by <span class="h6 text-black">Toward</span></small>
+            <span class="mt-5 text-black-50 card-text"><small class="text-muted">{{\Carbon\Carbon::parse($post->created_at)->format('M d, Y')}} created by <span class="h6 text-black">Toward</span></small>
             </span>
             <span class="text-danger"><i class="fas fa-eye ms-3 me-1" style="color: red; font-size: 12px ;"></i>{{$post->number_format_short($post->views) }}</span>
         </div>
