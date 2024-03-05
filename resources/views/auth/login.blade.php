@@ -28,8 +28,7 @@
             <div class="row g-0 justify-content-center bg-body-dark ">
                 <div class="hero-static col-sm-10 col-md-8 col-xl-6 d-flex align-items-center p-2 px-sm-0 ">
                     <!-- Sign In Block -->
-                    <div class="block block-rounded block-transparent block-fx-pop w-100 mb-0 overflow-hidden bg-image bg-white" style="background-image: url('/assets/logo/logo.jpeg'); background-repeat: no-repeat; background-size: contain;
-                    ">
+                    <div class="block block-rounded block-transparent block-fx-pop w-100 mb-0 overflow-hidden bg-image bg-white">
                         <div class=" row g-0">
                             <div class="col-md-6 order-md-1 bg-body-extra-light ">
                                 <div class="block-content block-content-full px-lg-5 py-md-5 py-lg-6">
@@ -72,10 +71,10 @@
                                     <!-- END Sign In Form -->
                                 </div>
                             </div>
-                            <div class="col-md-6 order-md-0  d-flex align-items-center">
-                                <div class="block-content block-content-full px-lg-5 py-md-5 py-lg-6">
-                                    <div class="d-flex">
-
+                            <div class="col-md-6 order-md-0 align-items-center">
+                                <div class="block-content block-content-full px-lg-5 py-md-5 py-lg-6" style="background-image: url('/assets/logo/logo.jpeg'); background-repeat: no-repeat; background-size: contain; background-position: center; width:100%; height:100%
+                    ">
+                                    <div>
                                     </div>
                                 </div>
                             </div>
