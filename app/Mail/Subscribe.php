@@ -13,14 +13,16 @@ class Subscribe extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $token;
+
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($token)
     {
-        //
+        $this->token = $token;
     }
 
     /**
@@ -31,7 +33,7 @@ class Subscribe extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: 'Subscribe',
+            subject: 'Confirm your email',
         );
     }
 
@@ -43,7 +45,7 @@ class Subscribe extends Mailable
     public function content()
     {
         return new Content(
-            view: 'view.name',
+            view: 'emails.verify',
         );
     }
 

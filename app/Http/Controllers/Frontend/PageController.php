@@ -136,4 +136,9 @@ class PageController extends Controller
     {
         return view('frontend.privacy');
     }
+
+    public function subscribe()
+    {
+        return view('frontend.subscribe');
+    }
 }

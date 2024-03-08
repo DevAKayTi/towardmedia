@@ -15,8 +15,9 @@ return new class extends Migration
     {
         Schema::create('subscribers', function (Blueprint $table) {
             $table->id();
+            $table->string('token');
             $table->string('email')->unique();
-            $table->boolean('verified')->default(false);
+            $table->boolean('is_activated')->default(0);
             $table->timestamps();
         });
     }

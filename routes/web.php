@@ -10,6 +10,7 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\VolumeController;
 use App\Http\Controllers\BulletinController;
+use App\Http\Controllers\SubscriberController;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -25,10 +26,10 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Route::get('/', [FrontendPageController::class, 'welcome'])->name('welcome');
 Route::get('/articles', [FrontendPageController::class, 'articles'])->name('articles');
 Route::get('/about-us', [FrontendPageController::class, 'aboutUs'])->name('about-us');
+Route::get('/subscribe', [FrontendPageController::class, 'subscribe'])->name('subscribe');
 Route::get('/privacy-policy', [FrontendPageController::class, 'privacyPolicy'])->name('privacy-policy');
 // Route::get('/news', [FrontendPageController::class, 'news'])->name('news');
 Route::get('/bulletins', [FrontendPageController::class, 'bulletins'])->name('bulletins');
@@ -43,6 +44,8 @@ Route::get('/blog/{tag:name}', [FrontendPageController::class, 'groupByTag'])->n
 Route::get('/c/{category:slug}', [FrontendPageController::class, 'groupByCategory'])->name('frontend.blog.groupByCategory');
 
 Route::post('/blog/increaseViewCount/{post_id}', [FrontendPageController::class, 'increaseViewCount']);
+Route::post('/subscriber',[SubscriberController::class, 'createSubscriber'])->name('subscribe.create');
+Route::get('/verify/{token}',[SubscriberController::class,'verifyMail'])->name('subscribe.verify');
 
 Route::middleware(['auth', 'prevent-back-history', 'check-user-status'])->prefix('admin')->group(function () {
     // dashboard

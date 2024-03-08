@@ -63,6 +63,9 @@
                         <li class="mx-3">
                             <a class="nav-link {{ request()->routeIs('about-us') ? 'active' : ' '}} " href="{{route('about-us')}}">About</a>
                         </li>
+                        <li class="mx-3">
+                            <a class="nav-link {{ request()->routeIs('subscribe') ? 'active' : ' '}} " href="{{route('subscribe')}}">Subscribe</a>
+                        </li>
                     </ul>
                 </div>
             </nav>
