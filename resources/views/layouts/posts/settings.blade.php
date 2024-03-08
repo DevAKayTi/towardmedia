@@ -57,8 +57,8 @@
                                 <div class="col-sm-8">
 
                                     <select class="form-select @error('published') is-invalid @enderror" id="published" name="published">
-                                        <option value="{{1}}">Published</option>
-                                        <option value="{{0}}" selected>Unpublished</option>
+                                        <option value="{{1}}" selected>Published</option>
+                                        <option value="{{0}}">Unpublished</option>
                                     </select>
                                 </div>
                             </div>
