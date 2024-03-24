@@ -16,7 +16,7 @@ class SendPost extends Mailable
     public $title;
     public $postTitle;
     public $description;
-    public $content;
+    public $slug;
     public $imagePath;
     public $email;
 
@@ -29,7 +29,7 @@ class SendPost extends Mailable
         $title,
         $postTitle,
         $description,
-        $content,
+        $slug,
         $imagePath,
         $email
         )
@@ -37,7 +37,7 @@ class SendPost extends Mailable
         $this->title = $title;
         $this->postTitle = $postTitle;
         $this->description = $description;
-        $this->content = $content;
+        $this->slug = $slug;
         $this->imagePath = $imagePath;
         $this->email = $email;
         //

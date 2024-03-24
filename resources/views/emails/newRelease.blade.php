@@ -49,9 +49,9 @@
                             <p style="margin-top: 0; margin-bottom: 20px; font-size: 16px;  color: #666666;">ဆီသို့စာစဉ် {{$postTitle}} ထွက်ရှိပြီ</p>
                             <p style="margin-top: 0; margin-bottom: 20px; font-size: 16px; line-height: 1.5; color: #666666;"></p>
                             <div style="margin-bottom: 20px;">
-                                <img src="http://localhost:8000/{{ $imagePath }}" alt=" " width="100%" style="max-width: 100%;">
+                                <img src="https://www.towardsmedia.com/storage/uploads/featured/202403211914u.jpg" alt=" " width="100%" style="max-width: 100%;">
                             </div>
-                            <button class="red-button"><a href="http://localhost:8000/{{strip_tags($content)}}">ပိုမိုဖတ်ရှုရန်</a></button>
+                            <button class="red-button"><a href="http://localhost:8000/p/{{$slug}}">ပိုမိုဖတ်ရှုရန်</a></button>
                         </td>
                     </tr>
                     <tr>

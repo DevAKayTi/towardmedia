@@ -59,7 +59,7 @@ class SendPostEmail implements ShouldQueue
                     $this->title,
                     $post->title,
                     $post->description,
-                    $post->content,
+                    $post->slug,
                     $imagePath,
                     $email
                 ));
