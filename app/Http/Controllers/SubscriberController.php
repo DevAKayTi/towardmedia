@@ -41,6 +41,11 @@ class SubscriberController extends Controller
         }
     }
 
+    public function updateSubscriber(Request $request,$email)
+    {
+        return view('frontend.unsubscribe', ['email' => $email ]);
+    }
+
     public function verifyMail($token)
     {
         $subscriber = Subscriber::where('token', $token)->first();
@@ -53,5 +58,12 @@ class SubscriberController extends Controller
             return response()->json(['error' => 'Subscriber not found'], 404);
         }
 
+    }
+
+    public function unSubscriber(Request $request,$email){
+        $subscriber = Subscriber::where('email', $email)->first();
+        $subscriber->delete();
+        return redirect()->route('subscribe.update','akayti22@gmail.com')->with(['success' => 'Successfully Added']);
+        
     }
 }

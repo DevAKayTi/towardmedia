@@ -62,7 +62,16 @@
                                     </select>
                                 </div>
                             </div>
-
+                            <div class="row mb-4 d-none" id="notification-row">
+                                {{-- {{$errors}} --}}
+                                <label class="col-sm-4 col-form-label">Mail</label>
+                                <div class="col-sm-8">
+                                    <select class="form-select" id="notification" name="notification">
+                                        <option value="{{1}}">Send</option>
+                                        <option value="{{0}}" selected>Unsend</option>
+                                    </select>
+                                </div>
+                            </div>
                             <div class="row mb-4">
                                 <label class="col-sm-4 col-form-label" for="example-wp-author">Author</label>
                                 <div class="col-sm-8">

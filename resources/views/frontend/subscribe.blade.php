@@ -10,7 +10,7 @@
         <h5 class=" opacity-75">Get updates all newsletter and new bulletins.</h5>    
 
         <div class="input-group mt-5" style="width:400px">
-            <input type="text" class="form-control @error('email') is-invalid @enderror" id="email" name="email" placeholder="Enter your e-mail" aria-label="Recipient's username" aria-describedby="button-addon2">
+            <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" placeholder="Enter your e-mail" aria-label="Recipient's username" aria-describedby="button-addon2">
             <button class="btn btn-danger" type="submit" id="button-addon2">Subscribe</button>
             @error('email')
             <span class="invalid-feedback" role="alert">

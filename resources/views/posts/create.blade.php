@@ -233,15 +233,18 @@
         if ($('#type').val() == 2) {
             $('#volume-row').removeClass('d-none');
             $('#bulletin-row').addClass('d-none');
-
+            $('#notification-row').removeClass('d-none');
         }else if ($('#type').val() == 3){
             $('#bulletin-row').removeClass('d-none');
             $('#volume-row').addClass('d-none');
+            $('#notification-row').removeClass('d-none');
         }else {
             if (!$('#volume-row').hasClass('d-none'))
                 $('#volume-row').addClass('d-none');
             if (!$('#bulletin-row').hasClass('d-none'))
                 $('#bulletin-row').addClass('d-none');
+            if (!$('#notification-row').hasClass('d-none'))
+                $('#notification-row').addClass('d-none');
         }
 
         let categoryOfArticles = ['Poems', 'Articles', 'Essays', 'Break Free', 'Student Voice', 'Short Novel'];
@@ -250,14 +253,18 @@
             if ($(this).val() == 2) {
                 $('#volume-row').removeClass('d-none');
                 $('#bulletin-row').addClass('d-none');
+                $('#notification-row').removeClass('d-none');
             }else if ($(this).val() == 3){
                 $('#bulletin-row').removeClass('d-none');
                 $('#volume-row').addClass('d-none');
+                $('#notification-row').removeClass('d-none');
             }else {
                 if (!$('#volume-row').hasClass('d-none'))
                     $('#volume-row').addClass('d-none');
                 if (!$('#bulletin-row').hasClass('d-none'))
                     $('#bulletin-row').addClass('d-none');
+                if (!$('#notification-row').hasClass('d-none'))
+                    $('#notification-row').addClass('d-none');
             }
             // for category row
             if ($(this).val() == 1 || $(this).val() == 2) {

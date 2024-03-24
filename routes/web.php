@@ -8,9 +8,12 @@ use App\Http\Controllers\Frontend\PageController as FrontendPageController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\EmailController;
 use App\Http\Controllers\VolumeController;
 use App\Http\Controllers\BulletinController;
 use App\Http\Controllers\SubscriberController;
+use App\Models\Post;
+
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -45,6 +48,8 @@ Route::get('/c/{category:slug}', [FrontendPageController::class, 'groupByCategor
 
 Route::post('/blog/increaseViewCount/{post_id}', [FrontendPageController::class, 'increaseViewCount']);
 Route::post('/subscriber',[SubscriberController::class, 'createSubscriber'])->name('subscribe.create');
+Route::get('/subscriber/{email}',[SubscriberController::class, 'updateSubscriber'])->name('subscribe.update');
+Route::post('/unsubscriber/{email}',[SubscriberController::class, 'unSubscriber'])->name('unsubscribe.destroy');
 Route::get('/verify/{token}',[SubscriberController::class,'verifyMail'])->name('subscribe.verify');
 
 Route::middleware(['auth', 'prevent-back-history', 'check-user-status'])->prefix('admin')->group(function () {
@@ -91,6 +96,9 @@ Route::middleware(['auth', 'prevent-back-history', 'check-user-status'])->prefix
 
     Route::post('createVolume', [PageController::class, 'createDynamicVolumeWithAjax'])->name('createVolume');
     Route::post('createBulletin', [PageController::class, 'createDynamicBulletinWithAjax'])->name('createBulletin');
+
+    //email
+    Route::resource('/emails',EmailController::class);
 });
 
 Route::get('/admin/login', [LoginController::class, 'showLoginForm'])->name('login');
@@ -98,3 +106,22 @@ Route::post('/admin/login', [LoginController::class, 'login'])->name('login');
 Route::post('/admin/logout', [LoginController::class, 'logout'])->name('logout');
 
 Auth::routes(['login' => false, 'register' => false, 'reset' => false, 'confirm' => false]);
+
+Route::get('/testing',function () {
+    // You can perform any necessary logic here
+    // For now, let's just return a view
+    
+    $post = Post::findOrFail(1001);
+
+    $postTitle = 'အတွဲ(၆)၊ အမှတ်(၄)';
+    $content = "ကိုယ်လွတ်ရုန်းမလား၊ ပြိုင်တူရုန်းမလား";
+    $imagePath = 'storage/uploads/featured/'. $post->post_thumbnail;
+    $email = 'akayti22@gmail.com';
+    
+    return view('emails.newRelease', [
+        'postTitle' => $postTitle,
+        'content' => $content,
+        'imagePath' => $imagePath,
+        'email' => $email
+    ]);
+});

@@ -15,6 +15,8 @@ use App\Models\Type;
 use App\Models\User;
 use App\Models\Volume;
 use App\Models\Bulletin;
+use App\Models\Subscriber;
+use App\Jobs\SendPostEmail;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
@@ -139,13 +141,15 @@ class PostController extends Controller
         if ($request->type == 2) {
             //if newLetter type need to have volume
             $request->validate([
-                'volume' => 'required'
+                'volume' => 'required',
+                'notification'=>'required'
             ]);
         }
         if ($request->type == 3) {
             //if newBulletin type need to have volume
             $request->validate([
-                'bulletin' => 'required'
+                'bulletin' => 'required',
+                'notification'=>'required'
             ]);
         }
         DB::beginTransaction();
@@ -189,7 +193,19 @@ class PostController extends Controller
                     'bulletin_id' => $request->bulletin,
                 ]);
             }
+
             DB::commit();
+
+            $type = $request->type == 2 ? 'Newsletter' : 'News Bulltein';
+            $title = "New Release: ".$type;
+
+            if($request->notification){
+                SendPostEmail::dispatch(
+                    $title,
+                    $post->id,
+                );
+            }
+
         } catch (Exception $e) {
             return back()->with(['error' => $e->getMessage()]);
             DB::rollBack();

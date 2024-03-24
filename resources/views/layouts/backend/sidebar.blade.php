@@ -127,6 +127,20 @@
                         </li>
                     </ul>
                 </li>
+                <li class="nav-main-heading ">Emails</li>
+                <li class="nav-main-item {{ (request()->is('admin/emails*') ? 'open' : '')}}">
+                    <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" href="#">
+                        <i class="nav-main-link-icon fa fa-user"></i>
+                        <span class="nav-main-link-name">Emails</span>
+                    </a>
+                    <ul class="nav-main-submenu">
+                        <li class="nav-main-item">
+                            <a class="nav-main-link {{ (request()->is('admin/emails') ? 'active' : '')}}" href="{{route('emails.index')}}">
+                                <span class="nav-main-link-name">All Emails</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
             </ul>
         </div>
         <!-- END Side Navigation -->

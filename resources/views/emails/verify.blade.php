@@ -14,7 +14,7 @@
                     <tr>
                         <td style="padding: 20px 0; text-align: center;background-color:#ffffff;">
                         <a class="navbar-brand" href="https://www.towardsmedia.com">
-                            <img src="https://www.towardsmedia.com/assets/logo/logo.png" alt="Logo" width="120" style="max-width: 100%;">
+                            <img src="https://www.towardsmedia.com/assets/logo/logo.jpeg" alt=" " width="120" style="max-width: 100%;">
                         </a>
                         </td>
                     </tr>
