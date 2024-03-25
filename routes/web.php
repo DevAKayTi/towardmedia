@@ -107,21 +107,3 @@ Route::post('/admin/logout', [LoginController::class, 'logout'])->name('logout')
 
 Auth::routes(['login' => false, 'register' => false, 'reset' => false, 'confirm' => false]);
 
-Route::get('/testing',function () {
-    // You can perform any necessary logic here
-    // For now, let's just return a view
-    
-    $post = Post::findOrFail(1001);
-
-    $postTitle = 'အတွဲ(၆)၊ အမှတ်(၄)';
-    $content = "ကိုယ်လွတ်ရုန်းမလား၊ ပြိုင်တူရုန်းမလား";
-    $imagePath = 'storage/uploads/featured/'. $post->post_thumbnail;
-    $email = 'akayti22@gmail.com';
-    
-    return view('emails.newRelease', [
-        'postTitle' => $postTitle,
-        'content' => $content,
-        'imagePath' => $imagePath,
-        'email' => $email
-    ]);
-});
