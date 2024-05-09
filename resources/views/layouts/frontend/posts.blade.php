@@ -1,6 +1,6 @@
 @foreach ($posts as $post)
 
-<div class="col-sm-12 col-md-6 {{$cols}} px-3 mb-4">
+<div class="col-sm-12 col-md-6 {{$cols}} px-3 pb-4 pt-3">
     <a href="{{route('frontend.blog.show',$post->slug)}}" style="text-decoration:none;">
 
         <img src="{{$post->photo()}}" class="d-block" alt="" srcset="" style="width:100%;object-fit: contain; height:300px; border-radius:10px;">
@@ -8,7 +8,7 @@
         <div class="overflow-hidden mb-3 text-black text-truncate">
             {{$post->description}}
         </div>
-        <div class="d-flex align-items-center  pb-3">
+        <div class="d-flex align-items-center pb-3">
             <div class=" d-flex justify-content-center align-items-center ">
                 @include('layouts.frontend.utils.tags',['tags'=>$post->tags()->limit(2)->get()])
             </div>
