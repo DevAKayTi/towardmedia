@@ -56,7 +56,7 @@
                         <span class="mt-5 text-black-50 card-text"><small class="text-muted"> {{\Carbon\Carbon::parse($post->created_at)->format('M d, Y')}}</small>
                         </span>
                     </div>
-                    <img src="{{$post->photo()}}" class="position-absolute end-0 opacity-80" alt="" srcset="" style="object-fit: contian; height:100%;">    
+                    <img src="{{$post->photo()}}" class="position-absolute end-0 opacity-80 d-none d-md-block" alt="" srcset="" style="object-fit: contian; height:100%;">    
                 </div>
             </a>
             @endif
