@@ -38,7 +38,7 @@ function number_format_short( $n, $precision = 1 ) {
 }
 ?>
 
-<div class="container" style="padding-left: 100px; padding-right: 100px">
+<div class="container detail-container">
     <span class="h4" style="line-height: 45px">{{$post->title}}</span>
     <br />
     <span class="mt-4 text-black-50">{{\Carbon\Carbon::parse($post->created_at)->format('M d, Y')}} created by <span class="h6 text-black">Toward</span></span>
@@ -48,7 +48,7 @@ function number_format_short( $n, $precision = 1 ) {
     </div>
 
     <div class="text-center mb-5">
-        <img class="d-block rounded " src="{{asset('storage/uploads/featured/'.$post->post_thumbnail.'')}}" alt="" style="width: 80%; height: 500px; object-fit: contain;" />
+        <img class="d-block rounded mx-auto" src="{{asset('storage/uploads/featured/'.$post->post_thumbnail.'')}}" alt="" style="width: 80%; height: 500px; object-fit: contain;" />
     </div>
     <div>
     @if(filter_var(strip_tags($post->content), FILTER_VALIDATE_URL))

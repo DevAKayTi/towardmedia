@@ -53,6 +53,15 @@
     }
 }
 
+@media (min-width: 576px) {
+    .detail-container {
+        padding-left: 100px;
+        padding-right: 100px;
+    }
+}
+
 .myanamr{
     font-family: 'Raleway', sans-serif;
 }
+
+
